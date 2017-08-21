@@ -1,3 +1,4 @@
+import { AuthModule } from './../auth/auth.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,7 +18,8 @@ export const ROUTES: Routes = [];
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    AuthModule
   ],
   declarations: [
     AppComponent
