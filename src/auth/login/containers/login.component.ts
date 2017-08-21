@@ -5,8 +5,11 @@ import { Component } from '@angular/core';
     styleUrls: ['login.component.scss'],
     template: `
         <div>
-            Login
-            <auth-form></auth-form>
+            <auth-form>
+                <h2>Login</h2>
+                <button type="submit">Login</button>
+                <a routerLink="/auth/register">Already a member?</a>
+            </auth-form>
         </div>
     `
 })
