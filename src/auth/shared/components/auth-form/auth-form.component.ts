@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,15 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
             <label>
                 <input type="text" formControlName="password" placeholder="Password">
             </label>
+
+            <div class="error" *ngIf="emailInvalid">
+                Oops..Email is invalid
+            </div>
+            <div class="error" *ngIf="passwordInvalid">
+                Oops..Password is invalid
+            </div>
+            <ng-content class=".error"></ng-content>
+
             <div class="auth-form__btn">
                 <ng-content select="button"></ng-content>
             </div>
@@ -25,9 +34,28 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 export class AuthFormComponent{
     constructor(private fb: FormBuilder){}
+    
+    @Output()
+    submitted = new EventEmitter<FormGroup>();
 
     form = this.fb.group({
         email: ['', Validators.email ],
-        password: ['', Validators.required]
+        password: ['', Validators.required, Validators.minLength(6)]
     });
+
+    get emailInvalid(){
+        const validator = this.form.get('email');
+        return validator.hasError('email') && validator.touched;
+    }
+
+    get passwordInvalid(){
+        const validator = this.form.get('password');
+        return validator.hasError('required') && validator.touched;
+    }
+
+    onSubmit(){
+        if(this.form.valid){
+            this.submitted.emit(this.form);
+        }
+    }
 }

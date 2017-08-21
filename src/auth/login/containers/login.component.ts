@@ -8,7 +8,10 @@ import { Component } from '@angular/core';
             <auth-form>
                 <h2>Login</h2>
                 <button type="submit">Login</button>
-                <a routerLink="/auth/register">Already a member?</a>
+                <a routerLink="/auth/register">Haven't registered?</a>
+                <div class="error" *ngIf="error">
+                    {{ error }}
+                </div>
             </auth-form>
         </div>
     `
@@ -16,4 +19,9 @@ import { Component } from '@angular/core';
 
 export class LoginComponent{
     constructor(){}
+
+    error: string;
+
+
+
 }
