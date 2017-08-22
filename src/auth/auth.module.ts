@@ -33,7 +33,7 @@ export const ROUTES: Routes = [
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
-        SharedModule
+        SharedModule.forRoot()
     ]
 })
 

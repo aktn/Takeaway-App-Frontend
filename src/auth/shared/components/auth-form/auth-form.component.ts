@@ -5,29 +5,31 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
     selector: 'auth-form',
     styleUrls: ['auth-form.component.scss'],
     template: `
-        <div class="auth-form" [formGroup]="form" (ngSumbit)="onSubmit()">
-            <ng-content select="h2"></ng-content>
-            <label>
-                <input type="text" formControlName="email" placeholder="Email address">
-            </label>
-            <label>
-                <input type="text" formControlName="password" placeholder="Password">
-            </label>
+        <div class="auth-form">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <ng-content select="h2"></ng-content>
+                <label>
+                    <input type="text" formControlName="email" placeholder="Email address">
+                </label>
+                <label>
+                    <input type="password" formControlName="password" placeholder="Password">
+                </label>
 
-            <div class="error" *ngIf="emailInvalid">
-                Oops..Email is invalid
-            </div>
-            <div class="error" *ngIf="passwordInvalid">
-                Oops..Password is invalid
-            </div>
-            <ng-content class=".error"></ng-content>
+                <div class="error" *ngIf="emailInvalid">
+                    Oops..Email is invalid
+                </div>
+                <div class="error" *ngIf="passwordInvalid">
+                    Oops..Password is invalid
+                </div>
+                <ng-content class=".error"></ng-content>
 
-            <div class="auth-form__btn">
-                <ng-content select="button"></ng-content>
-            </div>
-            <div class="auth-form__link">
-                <ng-content select="a"></ng-content>
-            </div>
+                <div class="auth-form__btn">
+                    <ng-content select="button"></ng-content>
+                </div>
+                <div class="auth-form__link">
+                    <ng-content select="a"></ng-content>
+                </div>
+            </form>
         </div>
     `
 })
@@ -39,8 +41,8 @@ export class AuthFormComponent{
     submitted = new EventEmitter<FormGroup>();
 
     form = this.fb.group({
-        email: ['', Validators.email ],
-        password: ['', Validators.required, Validators.minLength(6)]
+        email: ['', Validators.email],
+        password: ['', Validators.required]
     });
 
     get emailInvalid(){
@@ -55,6 +57,7 @@ export class AuthFormComponent{
 
     onSubmit(){
         if(this.form.valid){
+            console.log(this.form);
             this.submitted.emit(this.form);
         }
     }

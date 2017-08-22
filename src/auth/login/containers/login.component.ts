@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import { AuthService } from './../../shared/services/auth/auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,7 +8,7 @@ import { Component } from '@angular/core';
     styleUrls: ['login.component.scss'],
     template: `
         <div>
-            <auth-form>
+            <auth-form (submitted)="loginUser($event)">
                 <h2>Login</h2>
                 <button type="submit">Login</button>
                 <a routerLink="/auth/register">Haven't registered?</a>
@@ -18,9 +21,22 @@ import { Component } from '@angular/core';
 })
 
 export class LoginComponent{
-    constructor(){}
+    constructor(
+        private authService: AuthService,
+        private router: Router
+    ){}
 
     error: string;
+
+    async loginUser(event: FormGroup){
+        try{
+            await this.authService.loginUser(event.value.email, event.value.password);
+            this.router.navigate(['/']);
+        }
+        catch(err){
+            this.error = err.message;
+        }
+    }
 
 
 
