@@ -7,10 +7,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     template: `
         <div class="app-nav">
             <div class="wrapper">
-                <a routerLink="meal" routerLinkActive="active">Main Dishes</a>
+                <a routerLink="mains" routerLinkActive="active">Mains</a>
                 <a routerLink="meal" routerLinkActive="active">Soups</a>
-                <a routerLink="meal" routerLinkActive="active">Snacks</a>
                 <a routerLink="meal" routerLinkActive="active">Salads</a>
+                <a routerLink="meal" routerLinkActive="active">Desserts</a>
                 <a routerLink="meal" routerLinkActive="active">Drinks</a>
             </div>
         </div>
