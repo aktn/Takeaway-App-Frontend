@@ -12,7 +12,9 @@ import { Subscription } from 'rxjs/Subscription';
     <div>
       <app-header [user]="user$ | async" (logout)="onLogout()"></app-header>
       <app-nav *ngIf="(user$ | async)?.authenticated"></app-nav>
-      <router-outlet></router-outlet>
+      <div class="wrapper">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   `
 })

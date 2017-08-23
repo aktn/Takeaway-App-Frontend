@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 export const ROUTES: Routes = [
-    { path: 'mains', loadChildren: './dishes/dishes.module#DishesModule' }
+    { path: 'dishes', loadChildren: './dishes/dishes.module#DishesModule' }
 ];
 
 @NgModule({

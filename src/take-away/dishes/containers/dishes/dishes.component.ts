@@ -4,8 +4,15 @@ import { Component } from '@angular/core';
     selector: 'dishes',
     styleUrls: ['dishes.component.scss'],
     template: `
-        <div class="dishes">
-            Dishes
+        <div>
+            <div class="dishes">
+                <div class="dishes__title">
+                    <h1><img src="/img/dish.svg"/>Dishes</h1>
+                    <a class="btn__add" [routerLink]="['../dishes/new']">
+                        <img src="/img/add-white.svg">New dishes
+                    </a>
+                </div>
+            </div>
         </div>
     `
 })

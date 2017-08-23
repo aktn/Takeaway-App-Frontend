@@ -1,4 +1,4 @@
-import { ListItemComponent } from './../components/list-item/list-item.component';
+import { ListItemComponent } from './components/list-item/list-item.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
