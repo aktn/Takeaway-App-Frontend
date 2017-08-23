@@ -8,8 +8,7 @@ export const ROUTES: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(ROUTES),
-        SharedModule
+        RouterModule.forChild(ROUTES)
     ]
 })
 
