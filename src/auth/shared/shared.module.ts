@@ -1,3 +1,4 @@
+import { AuthGuard } from './guard/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { CommonModule } from '@angular/common';
@@ -22,7 +23,8 @@ export class SharedModule{
         return{
             ngModule: SharedModule,
             providers: [
-                AuthService
+                AuthService,
+                AuthGuard
             ]
         }
     }

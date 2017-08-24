@@ -16,7 +16,9 @@ import { AppComponent } from './containers/app/app.component';
 import { AppNavComponent } from './components/app-nav/app-nav.component';
 
 // routes
-export const ROUTES: Routes = [];
+export const ROUTES: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'dishes' }
+];
 
 @NgModule({
   imports: [
