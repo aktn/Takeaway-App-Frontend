@@ -1,3 +1,4 @@
+import { Dish } from './../../../shared/services/dishes/dishes.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
@@ -72,7 +73,7 @@ export class DishFormComponent{
     constructor(private fb: FormBuilder){}
 
     form = this.fb.group({
-        name: ['', Validators.required, Validators.minLength(2)],
+        name: ['', Validators.required],
         ingredients: this.fb.array(['']),
         price: ['', Validators.required],
         type: ['', Validators.required]
@@ -102,9 +103,14 @@ export class DishFormComponent{
         this.ingredients.removeAt(i);
     }
 
+    @Output() 
+    create = new EventEmitter<Dish>();
+
     createDish(){
         if(this.form.valid){
-            
+            this.create.emit(this.form.value);
         }
     }
+
+    
 }

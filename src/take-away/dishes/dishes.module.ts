@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { DishComponent } from './containers/dish/dish.component';
 import { DishFormComponent } from './components/dish-form/dish-form.component';
 import { DishesComponent } from './containers/dishes/dishes.component';
@@ -8,14 +9,16 @@ import { NgModule } from '@angular/core';
 
 export const ROUTES: Routes = [
     { path: '', component: DishesComponent },
-    { path: 'new', component: DishComponent }
+    { path: 'new', component: DishComponent },
+    { path: ':id', component: DishComponent }
 ];
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(ROUTES),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
     declarations: [
         DishesComponent,

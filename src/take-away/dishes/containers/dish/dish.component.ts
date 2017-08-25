@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs/Observable';
+import { DishesService, Dish } from './../../../shared/services/dishes/dishes.service';
+import { AuthService } from './../../../../auth/shared/services/auth/auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -11,9 +14,20 @@ import { Component } from '@angular/core';
                     <span>Dish</span>
                 </h1>
             </div>
-            <dish-form></dish-form>
+            <dish-form (create)="createDish($event)"></dish-form>
         </div>
     `
 })
 
-export class DishComponent{}
+export class DishComponent{
+    dish$ : Observable<Dish>;
+
+    constructor(
+        private dishesService: DishesService
+    ){}
+
+    async createDish(event: Dish){
+        await this.dishesService.createDish(event);
+        console.log(event);
+    }
+}

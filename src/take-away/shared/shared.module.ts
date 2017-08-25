@@ -1,8 +1,9 @@
+import { DishesService } from './services/dishes/dishes.service';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 @NgModule({
     imports: [
@@ -19,6 +20,13 @@ import { NgModule } from '@angular/core';
 })
 
 export class SharedModule{
-    constructor(){}
-
+    
+    static forRoot(): ModuleWithProviders{
+        return {
+            ngModule: SharedModule,
+            providers: [
+                DishesService
+            ]
+        }
+    }
 }
