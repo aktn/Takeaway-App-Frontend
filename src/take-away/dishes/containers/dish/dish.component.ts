@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { DishesService, Dish } from './../../../shared/services/dishes/dishes.service';
 import { AuthService } from './../../../../auth/shared/services/auth/auth.service';
@@ -23,11 +24,16 @@ export class DishComponent{
     dish$ : Observable<Dish>;
 
     constructor(
-        private dishesService: DishesService
+        private dishesService: DishesService,
+        private router: Router
     ){}
 
     async createDish(event: Dish){
         await this.dishesService.createDish(event);
-        console.log(event);
+        this.backToDishes();
+    }
+
+    backToDishes(){
+        this.router.navigate(['dishes']);
     }
 }

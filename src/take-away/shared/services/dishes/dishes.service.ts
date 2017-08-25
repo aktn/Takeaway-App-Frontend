@@ -28,7 +28,7 @@ export class DishesService{
         private db: AngularFireDatabase
     ){}
 
-    dishes$: Observable<Dish[]> = this.db.list(`dishes/${this.userId}`).do(next => this.store.set('meals',next));
+    dishes$: Observable<Dish[]> = this.db.list(`dishes/${this.userId}`).do(next => this.store.set('dishes',next));
 
     get userId(){
         return this.authService.user.uid;

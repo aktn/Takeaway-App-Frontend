@@ -1,3 +1,4 @@
+import { Dish } from './take-away/shared/services/dishes/dishes.service';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -8,11 +9,13 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 export interface State {
   [key: string]: any,
-  user: User
+  user: User,
+  dishes: Dish[]
 }
 
 const state: State = {
-  user: undefined
+  user: undefined,
+  dishes: undefined
 };
 
 export class Store {
