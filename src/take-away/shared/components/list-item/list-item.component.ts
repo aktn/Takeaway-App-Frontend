@@ -9,7 +9,7 @@ import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter } from 
         <a [routerLink]="getRouteId(item)">
             <p class="list-item__name">{{ item.name }}</p>
             <p class="list-item__ingredients">
-                <span>{{ item.ingredients }}</span>
+                <span>{{ item.ingredients | join }}</span>
             </p>
         </a>
         <div class="list-item__delete" *ngIf="toggled">

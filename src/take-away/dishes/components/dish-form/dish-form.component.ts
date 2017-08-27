@@ -25,7 +25,7 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angul
                         <h3>Category</h3>
                         <select formControlName="type">
                             <option value="">Select Type</option>
-                            <option *ngFor="let type of types" value="type">{{ type }}</option>
+                            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
                         </select>
                     </label>
                     <label>
