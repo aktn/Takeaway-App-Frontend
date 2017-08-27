@@ -20,7 +20,7 @@ import { Component, OnInit } from '@angular/core';
                     <div *ngIf="!dishes.length" class="message">
                         <img src="img/face.svg">Start adding a new dish 
                     </div>
-                    <list-item *ngFor="let dish of dishes" [item]="dish"></list-item>
+                    <list-item *ngFor="let dish of dishes" [item]="dish" (remove)="removeDish($event)"></list-item>
                 </div>
                 <ng-template #loading>
                     <div class="message">
@@ -47,4 +47,7 @@ export class DishesComponent implements OnInit{
         this.subscription = this.dishesService.dishes$.subscribe();
     }
 
-}
+    removeDish(event: Dish){
+        this.dishesService.deleteDish(event.$key);
+    }
+}   

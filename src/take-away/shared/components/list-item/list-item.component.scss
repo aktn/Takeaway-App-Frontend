@@ -37,3 +37,37 @@
     }
 }
   
+%button {
+    outline: 0;
+    cursor: pointer;
+    border: 0;
+}
+.confirm,
+.cancel {
+    @extend %button;
+    padding: 5px 10px;
+    margin: 0 0 0 5px;
+    font-size: 14px;
+}
+.confirm {
+    color: #fff;
+    background: #d73a49;
+    border-radius: 3px;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background: darken(#d73a49, 3%);
+    }
+}
+.cancel {
+    background: transparent;
+}
+.trash {
+    @extend %button;
+    border-left: 1px solid #c1cedb;
+    padding: 10px 15px;
+    background: #f6fafd;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background-color: darken(#f6fafd, 2%);
+    }
+}
