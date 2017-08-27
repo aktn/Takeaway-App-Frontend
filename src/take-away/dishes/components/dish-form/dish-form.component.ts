@@ -1,6 +1,6 @@
 import { Dish } from './../../../shared/services/dishes/dishes.service';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'dish-form',
@@ -19,7 +19,7 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angul
                     </label>
                     <label id="label">
                         <h3>Price</h3>
-                        <input type="text" formControlName="price" placeholder="Eg. 10" />
+                        <input type="text" formControlName="price" placeholder="Eg. 10" required />
                     </label>
                     <label id="label">
                         <h3>Category</h3>
@@ -66,11 +66,15 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angul
     `
 })
 
-export class DishFormComponent{
+export class DishFormComponent implements OnChanges{
 
     types = [ 'starter', 'main', 'soup', 'salad', 'dessert', 'drinks' ];
+    exists = false;
 
     constructor(private fb: FormBuilder){}
+
+    @Input()
+    dish: Dish;
 
     form = this.fb.group({
         name: ['', Validators.required],
@@ -78,6 +82,28 @@ export class DishFormComponent{
         price: ['', Validators.required],
         type: ['', Validators.required]
     });
+
+    ngOnChanges(changes: SimpleChanges){
+        if(this.dish && this.dish.name){
+            this.exists = true;
+            
+            this.emptyIngredients();
+
+            const value = this.dish;
+            this.form.patchValue(value);
+            if(value.ingredients){
+                for(const item of value.ingredients){
+                    this.ingredients.push(new FormControl(item));
+                }
+            }
+        }
+    }
+
+    emptyIngredients(){
+        while(this.ingredients.controls.length){
+            this.ingredients.removeAt(0);
+        }
+    }
 
     get ingredients(){
         return this.form.get('ingredients') as FormArray;
