@@ -29,7 +29,7 @@ export class DishesService{
     ){}
 
     dishes$: Observable<Dish[]> = this.db.list(`dishes/${this.userId}`).do(next => this.store.set('dishes',next));
-
+    
     get userId(){
         return this.authService.user.uid;
     }
@@ -51,7 +51,5 @@ export class DishesService{
     deleteDish(key: string){
         return this.db.list(`dishes/${this.userId}`).remove(key);
     }
-
-    
 
 }

@@ -21,7 +21,7 @@ import 'rxjs/add/operator/switchMap';
                 </h1>
             </div>
             <div *ngIf="dish$ | async as dish; else loading">
-                <dish-form [dish]="dish" (create)="createDish($event)"></dish-form>
+                <dish-form [dish]="dish" (create)="createDish($event)" (update)="updateDish($event)"></dish-form>
             </div>
             <ng-template #loading>
                 <div class="message"><img src="/img/loading.svg">Loading...</div>
@@ -52,6 +52,12 @@ export class DishComponent implements OnInit, OnDestroy{
 
     async createDish(event: Dish){
         await this.dishesService.createDish(event);
+        this.backToDishes();
+    }
+
+    async updateDish(event: Dish){
+        const key = this.route.snapshot.params.id;
+        await this.dishesService.updateDish(key, event);
         this.backToDishes();
     }
 

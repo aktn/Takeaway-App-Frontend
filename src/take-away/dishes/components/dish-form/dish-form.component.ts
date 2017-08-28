@@ -53,8 +53,11 @@ import { Component, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, In
                 </div>
                 <div class="dish-form__submit">
                     <div>
-                        <button class="button" type="button" (click)="createDish()">
+                        <button class="button" type="button" (click)="createDish()" *ngIf="!exists">
                             Create 
+                        </button>
+                        <button class="button" type="button" (click)="updateDish()" *ngIf="exists">
+                            Update 
                         </button>
                         <a [routerLink]="['../']" class="button button--cancel">
                             Cancel
@@ -135,6 +138,15 @@ export class DishFormComponent implements OnChanges{
     createDish(){
         if(this.form.valid){
             this.create.emit(this.form.value);
+        }
+    }
+
+    @Output()
+    update = new EventEmitter<Dish>();
+
+    updateDish(){
+        if(this.form.valid){
+            this.update.emit(this.form.value);
         }
     }
 

@@ -5,7 +5,7 @@ import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter } from 
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['list-item.component.scss'],
     template: `
-    <div class="list-item">
+    <div class="list-item" *ngIf="item.type === 'main'">
         <a [routerLink]="getRouteId(item)">
             <p class="list-item__name">{{ item.name }}</p>
             <p class="list-item__ingredients">
