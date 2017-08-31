@@ -1,4 +1,3 @@
-import { MenuModule } from './../take-away/menu/menu.module';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,8 +25,7 @@ export const ROUTES: Routes = [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     AuthModule,
-    TakeAwayModule,
-    MenuModule
+    TakeAwayModule
   ],
   declarations: [
     AppComponent,

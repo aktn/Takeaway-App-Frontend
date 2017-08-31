@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from './../../../../store';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +25,7 @@ import { Component, OnInit } from '@angular/core';
                 </div>
                 <ng-template #loading>
                     <div class="message">
-                        <img src="img/loading.svg"> Loading dishes..
+                        <img src="img/loading.svg"> Loading dishes.. 
                     </div>
                 </ng-template>
             </div>
@@ -37,9 +38,19 @@ export class DishesComponent implements OnInit{
     dishes$: Observable<Dish[]>;
     subscription: Subscription;
 
+    types = [
+        { key: 'starter', name: 'Starter' },
+        { key: 'main', name: 'Main' },
+        { key: 'dessert', name: 'Dessert' },
+        { key: 'drinks', name: 'drkins' }
+    ];
+
+    
+
     constructor(
         private store: Store,
-        private dishesService: DishesService
+        private dishesService: DishesService,
+        private route: ActivatedRoute
     ){}
 
     ngOnInit(){
@@ -50,4 +61,8 @@ export class DishesComponent implements OnInit{
     removeDish(event: Dish){
         this.dishesService.deleteDish(event.$key);
     }
+
+    
+    
+    
 }   

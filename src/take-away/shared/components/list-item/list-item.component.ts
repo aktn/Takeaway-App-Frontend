@@ -1,11 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'list-item',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    
     styleUrls: ['list-item.component.scss'],
     template: `
-    <div class="list-item" *ngIf="item.type === 'main'">
+    <div class="list-item">
         <a [routerLink]="getRouteId(item)">
             <p class="list-item__name">{{ item.name }}</p>
             <p class="list-item__ingredients">
@@ -33,6 +34,10 @@ export class ListItemComponent{
 
     @Output()
     remove = new EventEmitter<any>();
+
+    constructor(
+        private route: ActivatedRoute
+    ){}
 
     toggle(){
         this.toggled = !this.toggled;

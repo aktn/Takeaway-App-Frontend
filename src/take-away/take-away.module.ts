@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 
 export const ROUTES: Routes = [
     { path: 'dishes', canActivate: [AuthGuard], loadChildren: './dishes/dishes.module#DishesModule' },
-    { path: 'menu', canActivate: [AuthGuard], loadChildren: './menu/menu.module#MenuModule' }
+    { path: 'restaurants', canActivate: [AuthGuard], loadChildren: './restaurants/restaurants.module#RestaurantsModule'}
 ];
 
 @NgModule({
