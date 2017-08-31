@@ -1,3 +1,4 @@
+import { RestaurantsService } from './services/restaurants/restaurants.service';
 import { JoinPipe } from './pipes/join.pipe';
 import { DishesService } from './services/dishes/dishes.service';
 import { ListItemComponent } from './components/list-item/list-item.component';
@@ -28,7 +29,8 @@ export class SharedModule{
         return {
             ngModule: SharedModule,
             providers: [
-                DishesService
+                DishesService,
+                RestaurantsService
             ]
         }
     }
