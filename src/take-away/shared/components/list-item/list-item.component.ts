@@ -10,12 +10,15 @@ import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter } from 
         <a [routerLink]="getRouteId(item)">
             <p class="list-item__name">{{ item.name }}</p>
             <p class="list-item__ingredients">
-                <span>{{ item.ingredients | join }}</span>
+                <span *ngIf="item.ingredients; else restaurants;">{{ item.ingredients | join }}</span>
+                <ng-template #restaurants>
+                    <span>{{ item | join }}</span>
+                </ng-template>
             </p>
         </a>
         <div class="list-item__delete" *ngIf="toggled">
             <p>Delete?</p>
-            <button type="button" class="confirm" (click)="removeDish()">Confirm</button>
+            <button type="button" class="confirm" (click)="removeItem()">Confirm</button>
             <button type="button" class="cancel" (click)="toggle()">Cancel</button>
         </div>
         <button class="trash" type="button" (click)="toggle()">
@@ -43,7 +46,7 @@ export class ListItemComponent{
         this.toggled = !this.toggled;
     }
 
-    removeDish(){
+    removeItem(){
         this.remove.emit(this.item);
     }
 
