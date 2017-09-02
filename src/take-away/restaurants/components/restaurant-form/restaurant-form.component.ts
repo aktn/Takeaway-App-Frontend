@@ -1,5 +1,6 @@
+import { Restaurant } from './../../../shared/services/restaurants/restaurants.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'restaurant-form',
@@ -56,6 +57,9 @@ import { Component } from '@angular/core';
                 <div class="restaurant-form__submit">
                     <button type="button" class="button" *ngIf="!exists" (click)="addRestaurant()">Add</button>
                     <button type="button" class="button" *ngIf="exists" (click)="editRestaurant()">Edit</button>
+                    <a [routerLink]="['../']" class="button button--cancel">
+                        Cancel
+                    </a>
                 </div>
             </form>
         </div>
@@ -67,6 +71,9 @@ export class RestaurantFormComponent{
     exists = false;
 
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    @Output()
+    create = new EventEmitter<Restaurant>();
 
     constructor(
         private fb: FormBuilder
@@ -94,5 +101,9 @@ export class RestaurantFormComponent{
 
     get checkphoneNumber(){
         return this.form.get('phoneNumber').hasError('required') && this.form.get('phoneNumber').touched;
+    }
+
+    addRestaurant(){
+        this.create.emit(this.form.value);
     }
 }

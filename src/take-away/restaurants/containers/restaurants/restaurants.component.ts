@@ -18,12 +18,12 @@ import { Component, OnInit } from '@angular/core';
                     </a>
                 </div>
                 <div *ngIf="restaurants$ | async as restaurants; else loading;">
-                    <div class="!restaurants.length" class="message">
+                    <div *ngIf="!restaurants.length" class="message">
                         <img src="/img/face.svg">Start adding a new location!
                     </div>
                     <list-item *ngFor="let restaurant of restaurants" [item]="restaurant" (remove)="removeRestaurant()"></list-item>
                 </div>
-                <ng-template #Loading>
+                <ng-template #loading>
                     <div class="message">
                         <img src="/img/loading"> Loading places...
                     </div>
@@ -49,4 +49,5 @@ export class RestaurantsComponent implements OnInit{
     removeRestaurant(){
 
     }
+
 }

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Restaurant, RestaurantsService } from './../../../shared/services/restaurants/restaurants.service';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'restaurant',
@@ -18,7 +19,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
                     </ng-template>
                 </h1>
             </div>
-            <restaurant-form></restaurant-form>
+            <restaurant-form (create)="createRestaurant($event)"></restaurant-form>
         </div>
     `
 })
@@ -42,6 +43,15 @@ export class RestaurantComponent implements OnInit, OnDestroy{
 
     ngOnDestroy(){
         this.subscription.unsubscribe();
+    }
+
+    async createRestaurant(event: Restaurant){
+        await this.restaurantsService.addRestaurant(event);
+        this.backToRestaurants();
+    }
+
+    backToRestaurants(){
+        this.router.navigate(['restaurants']);
     }
     
 }
