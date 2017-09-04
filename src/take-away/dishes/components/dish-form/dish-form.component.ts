@@ -63,6 +63,16 @@ import { Component, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, In
                             Cancel
                         </a>
                     </div>
+                    <div class="dish-form__delete" *ngIf="exists">
+                        <div *ngIf="toggled">
+                            <p>Delete item?</p>
+                            <button class="confirm" type="button" (click)="removeDish()">Yes</button>
+                            <button class="cancel" type="button" (click)="toggle()">No</button>
+                        </div>
+                        <button class="button button--delete" type="button" (click)="toggle()">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -73,11 +83,15 @@ export class DishFormComponent implements OnChanges{
 
     types = [ 'starter', 'main', 'soup', 'salad', 'dessert', 'drinks' ];
     exists = false;
+    toggled = false;
 
     constructor(private fb: FormBuilder){}
 
     @Input()
     dish: Dish;
+
+    @Output()
+    remove = new EventEmitter<Dish>();
 
     form = this.fb.group({
         name: ['', Validators.required],
@@ -100,6 +114,10 @@ export class DishFormComponent implements OnChanges{
                 }
             }
         }
+    }
+
+    toggle(){
+        this.toggled = !this.toggled;
     }
 
     emptyIngredients(){
@@ -150,5 +168,8 @@ export class DishFormComponent implements OnChanges{
         }
     }
 
+    removeDish(){
+        this.remove.emit(this.form.value);
+    }
     
 }

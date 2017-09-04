@@ -21,7 +21,7 @@ import { Component, OnInit } from '@angular/core';
                     <div *ngIf="!restaurants.length" class="message">
                         <img src="/img/face.svg">Start adding a new location!
                     </div>
-                    <list-item *ngFor="let restaurant of restaurants" [item]="restaurant" (remove)="removeRestaurant()"></list-item>
+                    <list-item *ngFor="let restaurant of restaurants" [item]="restaurant" (remove)="removeRestaurant($event)"></list-item>
                 </div>
                 <ng-template #loading>
                     <div class="message">
@@ -46,8 +46,8 @@ export class RestaurantsComponent implements OnInit{
         this.subscription = this.restaurantsService.restaurants$.subscribe();
     }
 
-    removeRestaurant(){
-
+    removeRestaurant(event: Restaurant){
+        return this.restaurantsService.removeRestaurant(event.$key);
     }
 
 }

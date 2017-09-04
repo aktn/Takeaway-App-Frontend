@@ -58,6 +58,20 @@
             background-color: darken(#eff4f9, 5%);
         }
     }
+    &__delete {
+        display: flex;
+        align-items: center;
+        > div {
+            display: flex;
+            align-items: center;
+            p {
+                margin: 0;
+            }
+        }
+        .cancel {
+            margin: 0 20px 0 0;
+        }
+    }
     h3 {
         font-size: 18px;
         font-weight: 600;
@@ -113,7 +127,42 @@
             color: #aaa;
         }
     }
-    .button {
+    
+}
+%button {
+    outline: 0;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+}
+.error {
+    color: #a94442;
+    background: #f2dede;
+    border: 1px solid #e4b3b3;
+    border-radius: 2px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 10px 0 0;
+}
+.confirm,
+.cancel {
+    @extend %button;
+    padding: 5px 10px;
+    margin: 0 0 0 5px;
+    font-size: 14px;
+}
+.confirm {
+    color: #fff;
+    background: #d73a49;
+    border-radius: 3px;
+    transition: all .2s ease-in-out;
+    &:hover {
+    background: darken(#d73a49, 3%);
+    }
+}
+
+.button {
         cursor: pointer;
         outline: 0;
         border: 0;
@@ -147,20 +196,3 @@
             }
         }
     }
-}
-%button {
-    outline: 0;
-    cursor: pointer;
-    border: 0;
-    background: transparent;
-}
-.error {
-    color: #a94442;
-    background: #f2dede;
-    border: 1px solid #e4b3b3;
-    border-radius: 2px;
-    padding: 8px;
-    font-size: 14px;
-    font-weight: 400;
-    margin: 10px 0 0;
-}

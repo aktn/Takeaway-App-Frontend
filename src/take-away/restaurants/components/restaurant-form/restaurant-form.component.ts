@@ -1,6 +1,6 @@
 import { Restaurant } from './../../../shared/services/restaurants/restaurants.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, SimpleChanges, Input, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'restaurant-form',
@@ -55,25 +55,45 @@ import { Component, EventEmitter, Output } from '@angular/core';
                     </label> 
                 </div>
                 <div class="restaurant-form__submit">
-                    <button type="button" class="button" *ngIf="!exists" (click)="addRestaurant()">Add</button>
-                    <button type="button" class="button" *ngIf="exists" (click)="editRestaurant()">Edit</button>
-                    <a [routerLink]="['../']" class="button button--cancel">
-                        Cancel
-                    </a>
+                    <div>
+                        <button type="button" class="button" *ngIf="!exists" (click)="addRestaurant()">Add</button>
+                        <button type="button" class="button" *ngIf="exists" (click)="editRestaurant()">Edit</button>
+                        <a [routerLink]="['../']" class="button button--cancel">
+                            Cancel
+                        </a>
+                    </div>
+                    <div class="restaurant-form__delete" *ngIf="exists">
+                        <div *ngIf="toggled">
+                            <p>Delete item?</p>
+                            <button class="confirm" type="button" (click)="removeRestaurant()">Yes</button>
+                            <button class="cancel" type="button" (click)="toggle()">No</button>
+                        </div>
+                        <button class="button button--delete" type="button" (click)="toggle()">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     `
 })
 
-export class RestaurantFormComponent{
+export class RestaurantFormComponent implements OnChanges{
 
     exists = false;
 
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+    toggled = false;
+
+    @Input()
+    restaurant: Restaurant;
+
     @Output()
     create = new EventEmitter<Restaurant>();
+
+    @Output()
+    remove = new EventEmitter<Restaurant>();
 
     constructor(
         private fb: FormBuilder
@@ -86,6 +106,19 @@ export class RestaurantFormComponent{
         phoneNumber: ['', Validators.required],
         openingTimes: this.fb.array([''])
     });
+
+    ngOnChanges(changes: SimpleChanges){
+        if(this.restaurant && this.restaurant.name){
+            this.exists = true;
+
+            const value = this.restaurant;
+            this.form.patchValue(value);
+        }
+    }
+
+    toggle(){
+        this.toggled = !this.toggled;
+    }
 
     get checkName(){
         return this.form.get('name').hasError('required') && this.form.get('name').touched;
@@ -105,5 +138,9 @@ export class RestaurantFormComponent{
 
     addRestaurant(){
         this.create.emit(this.form.value);
+    }
+
+    removeRestaurant(){
+        this.remove.emit(this.form.value);
     }
 }

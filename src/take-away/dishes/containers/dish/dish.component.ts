@@ -21,7 +21,7 @@ import 'rxjs/add/operator/switchMap';
                 </h1>
             </div>
             <div *ngIf="dish$ | async as dish; else loading">
-                <dish-form [dish]="dish" (create)="createDish($event)" (update)="updateDish($event)"></dish-form>
+                <dish-form [dish]="dish" (create)="createDish($event)" (update)="updateDish($event)" (remove)="removeDish($event)"></dish-form>
             </div>
             <ng-template #loading>
                 <div class="message"><img src="/img/loading.svg">Loading...</div>
@@ -63,5 +63,11 @@ export class DishComponent implements OnInit, OnDestroy{
 
     backToDishes(){
         this.router.navigate(['dishes']);
+    }
+
+    async removeDish(event: Dish){
+        const key = this.route.snapshot.params.id;
+        await this.dishesService.deleteDish(key);
+        this.backToDishes();
     }
 }

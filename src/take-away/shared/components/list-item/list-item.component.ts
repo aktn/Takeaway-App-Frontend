@@ -12,7 +12,7 @@ import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter } from 
             <p class="list-item__ingredients">
                 <span *ngIf="item.ingredients; else restaurants;">{{ item.ingredients | join }}</span>
                 <ng-template #restaurants>
-                    <span>{{ item | join }}</span>
+                    <span>{{ item.address | join }}</span>
                 </ng-template>
             </p>
         </a>
@@ -51,6 +51,6 @@ export class ListItemComponent{
     }
 
     getRouteId(item: any){
-        return [`../dishes`, item.$key];
+        return[`../${ item.ingredients ? 'dishes' : 'restaurants' }`,item.$key];
     }
 }

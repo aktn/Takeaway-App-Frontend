@@ -9,7 +9,8 @@ import { NgModule } from '@angular/core';
 
 export const ROUTES: Routes = [
     { path: '', component: RestaurantsComponent },
-    { path: 'new', component: RestaurantComponent }
+    { path: 'new', component: RestaurantComponent },
+    { path: ':id', component: RestaurantComponent }
 ];
 
 @NgModule({

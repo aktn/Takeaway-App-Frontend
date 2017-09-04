@@ -19,7 +19,12 @@ import 'rxjs/add/operator/switchMap';
                     </ng-template>
                 </h1>
             </div>
-            <restaurant-form (create)="createRestaurant($event)"></restaurant-form>
+            <div *ngIf="restaurant$ | async as restaurant; else loading">
+                <restaurant-form [restaurant]="restaurant" (create)="createRestaurant($event)" (remove)="removeRestaurant($event)"></restaurant-form>
+            </div>
+            <ng-template #loading>
+                <div class="message"><img src="/img/loading.svg">Loading...</div>
+            </ng-template>
         </div>
     `
 })
@@ -54,4 +59,9 @@ export class RestaurantComponent implements OnInit, OnDestroy{
         this.router.navigate(['restaurants']);
     }
     
+    async removeRestaurant(event: Restaurant){
+        const key = this.route.snapshot.params.id;
+        await this.restaurantsService.removeRestaurant(key);
+        this.backToRestaurants();
+    }
 }
