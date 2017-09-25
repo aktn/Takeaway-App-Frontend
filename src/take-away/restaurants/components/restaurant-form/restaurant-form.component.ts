@@ -18,14 +18,14 @@ import { Component, EventEmitter, Output, SimpleChanges, Input, OnChanges } from
                     </label>
                     <label>
                         <h3>Address</h3>
-                        <input type="text" formContolName="address">
+                        <input type="text" formControlName="address">
                         <div class="error" *ngIf="checkAddress">
                             Address is missing!
                         </div>
                     </label>
                     <label id="label">
                         <h3>Post Code</h3>
-                        <input type="text" formContorlName="postCode">
+                        <input type="text" formControlName="postCode">
                         <div class="error" *ngIf="checkPostCode">
                             Post code is missing!
                         </div>
@@ -37,22 +37,6 @@ import { Component, EventEmitter, Output, SimpleChanges, Input, OnChanges } from
                             Phone number is missing!
                         </div>
                     </label>
-                    <h3>Opening Hours</h3>
-                    <label *ngFor="let day of days; index as i;">
-                        <div class="box">
-                            <h3>{{ day }} </h3>
-                                <div class="box__time">
-                                    From
-                                    <input type="text">
-                                    <input type="text">
-                                </div>
-                                <div class="box__time">
-                                    Till
-                                    <input type="text">
-                                    <input type="text"> 
-                                </div>
-                        </div>
-                    </label> 
                 </div>
                 <div class="restaurant-form__submit">
                     <div>
@@ -81,8 +65,6 @@ import { Component, EventEmitter, Output, SimpleChanges, Input, OnChanges } from
 export class RestaurantFormComponent implements OnChanges{
 
     exists = false;
-
-    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     toggled = false;
 
@@ -132,7 +114,7 @@ export class RestaurantFormComponent implements OnChanges{
         return this.form.get('postCode').hasError('required') && this.form.get('postCode').touched;
     }
 
-    get checkphoneNumber(){
+    get checkPhoneNumber(){
         return this.form.get('phoneNumber').hasError('required') && this.form.get('phoneNumber').touched;
     }
 

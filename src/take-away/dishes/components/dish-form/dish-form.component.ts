@@ -46,7 +46,7 @@ import { Component, OnChanges, ChangeDetectionStrategy, Output, EventEmitter, In
                     </div>
                     <div formArrayName="ingredients">
                         <label *ngFor="let x of ingredients.controls; index as i;">
-                            <input type="text" [formControlName]="i" placeholder="Eg. Cheese" />
+                            <input type="text" [formControlName]="i" placeholder="Eg. Cheese"/>
                             <span class="dish-form__remove" (click)="removeIngredients(i)"></span>
                         </label>
                     </div>

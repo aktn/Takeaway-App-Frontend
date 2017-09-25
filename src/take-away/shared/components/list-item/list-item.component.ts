@@ -12,7 +12,7 @@ import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter } from 
             <p class="list-item__ingredients">
                 <span *ngIf="item.ingredients; else restaurants;">{{ item.ingredients | join }}</span>
                 <ng-template #restaurants>
-                    <span>{{ item.address | join }}</span>
+                    <span>{{ item.address }}</span>
                 </ng-template>
             </p>
         </a>
